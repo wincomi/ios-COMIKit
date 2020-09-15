@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ListDataSourceRenderable {
+public protocol ListDataSourceRenderable {
 	associatedtype Section: SectionRepresentable & Hashable where Section.Row: Hashable
 	typealias DataSource = ListDataSource<Section>
 
@@ -9,7 +9,7 @@ protocol ListDataSourceRenderable {
 }
 
 extension ListDataSourceRenderable where Self: UITableViewController {
-	func setupListDataSource() {
+	public func setupListDataSource() {
 		tableView.dataSource = dataSource
 	}
 }

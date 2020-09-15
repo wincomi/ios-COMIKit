@@ -1,6 +1,6 @@
 import UIKit
 
-protocol SectionRepresentable {
+public protocol SectionRepresentable {
 	associatedtype Row: RowRepresentable
 
 	var headerText: String? { get }

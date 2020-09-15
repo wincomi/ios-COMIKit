@@ -1,6 +1,6 @@
 import UIKit
 
-public class LocalizedIndexedCollation<Value> {
+open class LocalizedIndexedCollation<Value> {
 	private class Item {
         var value: Value
         @objc var collationString: String
@@ -48,9 +48,9 @@ public class LocalizedIndexedCollation<Value> {
 }
 
 extension LocalizedIndexedCollation.Section: SectionRepresentable where Value: RowRepresentable & Hashable {
-	var headerText: String? { title }
-	var footerText: String? { nil }
-	var rows: [Value] { items }
+	public var headerText: String? { title }
+	public var footerText: String? { nil }
+	public var rows: [Value] { items }
 }
 
 extension LocalizedIndexedCollation.Section: Identifiable {
