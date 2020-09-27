@@ -1,7 +1,12 @@
+//
+//  RowRepresentable.swift
+//  COMIKit
+//
+
 import UIKit
 
 public protocol RowRepresentable {
-	var title: String { get }
-	var description: String? { get }
+	var text: String { get }
+	var secondaryText: String? { get }
 	var image: UIImage? { get }
 }
