@@ -23,6 +23,17 @@ public struct ContextMenuItem {
 	/// handler not working when it has children
 	public var handler: (() -> Void)? = nil
 
+	// MARK: - Initialization
+	public init(title: String, image: UIImage? = nil, discoverabilityTitle: String? = nil, style: Style = .default, isEnabled: Bool = true, children: [ContextMenuItem] = [], handler: (() -> Void)? = nil) {
+		self.title = title
+		self.image = image
+		self.discoverabilityTitle = discoverabilityTitle
+		self.style = style
+		self.isEnabled = isEnabled
+		self.children = children
+		self.handler = handler
+	}
+
 	// MARK: - Supporting UIMenu
 	func uiAction(state: UIMenuElement.State = .off, identifier: UIAction.Identifier? = nil) -> UIAction {
 		UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: discoverabilityTitle, attributes: uiMenuElementAttributes, state: state) { _ in
