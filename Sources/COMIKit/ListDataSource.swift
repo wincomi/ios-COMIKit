@@ -3,6 +3,25 @@ import UIKit
 open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableViewDiffableDataSource<Section, Section.Row> where Section.Row: Hashable {
 	typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Section.Row>
 
+	// MARK: - CellProviders
+	public enum CellProviders {
+		public static func `default`() -> ListDataSource<Section>.CellProvider {
+			return { (tableView, indexPath, row) in
+				guard let cell = tableView.dequeueReusableCell(withIdentifier: ValueTableViewCell.reuseIdentifier, for: indexPath) as? ValueTableViewCell else { return nil }
+				cell.configure(with: row)
+				return cell
+			}
+		}
+
+		public static func subtitle() -> ListDataSource<Section>.CellProvider {
+			return { (tableView, indexPath, row) in
+				guard let cell = tableView.dequeueReusableCell(withIdentifier: SubtitleTableViewCell.reuseIdentifier, for: indexPath) as? SubtitleTableViewCell else { return nil }
+				cell.configure(with: row)
+				return cell
+			}
+		}
+	}
+
 	// MARK: Headers, and Footers
 	public var titleForHeader: ((_ tableView: UITableView, _ section: Int) -> String?)?
 	public var titleForFooter: ((_ tableView: UITableView, _ section: Int) -> String?)?
