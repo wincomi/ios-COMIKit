@@ -1,3 +1,8 @@
+//
+//  ListStateRenderable.swift
+//  COMIKit
+//
+
 import UIKit
 
 public protocol ListStateRenderable {

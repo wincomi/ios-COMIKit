@@ -1,3 +1,8 @@
+//
+//  String+Extension.swift
+//  COMIKit
+//
+
 import Foundation
 
 public extension String {

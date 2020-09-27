@@ -1,3 +1,8 @@
+//
+//  ListDataSourceRenderable.swift
+//  COMIKit
+//
+
 import UIKit
 
 public protocol ListDataSourceRenderable {

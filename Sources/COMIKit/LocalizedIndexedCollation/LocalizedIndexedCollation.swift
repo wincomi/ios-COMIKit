@@ -1,3 +1,8 @@
+//
+//  LocalizedIndexedCollation.swift
+//  COMIKit
+//
+
 import UIKit
 
 open class LocalizedIndexedCollation<Value> {
@@ -47,12 +52,14 @@ open class LocalizedIndexedCollation<Value> {
     }
 }
 
+// MARK: - SectionRepresentable
 extension LocalizedIndexedCollation.Section: SectionRepresentable where Value: RowRepresentable & Hashable {
 	public var headerText: String? { title }
 	public var footerText: String? { nil }
 	public var rows: [Value] { items }
 }
 
+// MARK: - Identifiable
 extension LocalizedIndexedCollation.Section: Identifiable {
     public var id: String { title }
 }

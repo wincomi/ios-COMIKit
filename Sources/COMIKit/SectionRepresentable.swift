@@ -1,3 +1,8 @@
+//
+//  SectionRepresentable.swift
+//  COMIKit
+//
+
 import UIKit
 
 public protocol SectionRepresentable {

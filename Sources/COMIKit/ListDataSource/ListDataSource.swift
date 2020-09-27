@@ -1,3 +1,8 @@
+//
+//  ListDataSource.swift
+//  COMIKit
+//
+
 import UIKit
 
 open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableViewDiffableDataSource<Section, Section.Row> where Section.Row: Hashable {
@@ -22,23 +27,23 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 		}
 	}
 
-	// MARK: Headers, and Footers
+	// MARK: - Headers, and Footers
 	public var titleForHeader: ((_ tableView: UITableView, _ section: Int) -> String?)?
 	public var titleForFooter: ((_ tableView: UITableView, _ section: Int) -> String?)?
 
-	// MARK: Inserting or Deleting Table Rows
+	// MARK: - Inserting or Deleting Table Rows
 	public var commit: ((_ tableView: UITableView, _ editingStyle: UITableViewCell.EditingStyle, _ indexPath: IndexPath) -> Void)?
 	public var canEdit: ((_ tableView: UITableView, _ indexPath: IndexPath) -> Bool)?
 
-	// MARK: Reordering Table Rows
+	// MARK: - Reordering Table Rows
 	public var canMove: ((_ tableView: UITableView, _ indexPath: IndexPath) -> Bool)?
 	public var move: ((_ tableView: UITableView, _ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
 
-	// MARK: Configuring an Index
+	// MARK: - Configuring an Index
 	public var sectionIndexTitles: ((_ tableView: UITableView) -> [String]?)?
 	public var sectionForSectionIndexTitle: ((_ tableView: UITableView, _ title: String, _ section: Int) -> Int)?
 
-	// MARK: Functions
+	// MARK: - Updating Data
 	public func clear(animatingDifferences: Bool = false) {
 		apply(Snapshot(), animatingDifferences: animatingDifferences)
 	}
@@ -58,7 +63,7 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 		return snapshot
 	}
 
-	// MARK: UITableViewDataSource
+	// MARK: - UITableViewDataSource
 	public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		guard let titleForHeader = titleForHeader else { return snapshot().sectionIdentifiers[section].headerText }
 		return titleForHeader(tableView, section)
@@ -92,5 +97,4 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 	public override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
 		return sectionForSectionIndexTitle?(tableView, title, index) ?? index
 	}
-
 }
