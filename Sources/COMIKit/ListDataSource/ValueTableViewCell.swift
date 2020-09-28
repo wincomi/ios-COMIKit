@@ -16,7 +16,7 @@ open class ValueTableViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func configure(with row: RowRepresentable) {
+	open func configure(with row: RowRepresentable) {
 		textLabel?.text = row.text
 		detailTextLabel?.text = row.secondaryText
 		imageView?.image = row.image

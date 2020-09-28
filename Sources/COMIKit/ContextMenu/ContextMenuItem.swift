@@ -35,13 +35,13 @@ public struct ContextMenuItem {
 	}
 
 	// MARK: - Supporting UIMenu
-	func uiAction(state: UIMenuElement.State = .off, identifier: UIAction.Identifier? = nil) -> UIAction {
+	public func uiAction(state: UIMenuElement.State = .off, identifier: UIAction.Identifier? = nil) -> UIAction {
 		UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: discoverabilityTitle, attributes: uiMenuElementAttributes, state: state) { _ in
 			self.handler?()
 		}
 	}
 
-	var uiMenuElement: UIMenuElement {
+	public var uiMenuElement: UIMenuElement {
 		guard !children.isEmpty else { return uiAction() }
 		return UIMenu(title: title, image: image, options: uiMenuOptions, children: children.map(\.uiMenuElement))
 	}
@@ -59,7 +59,7 @@ public struct ContextMenuItem {
 	}
 
 	// MARK: - Supporting UIAlertController
-	func uiAlertAction(childrenHandler: (([ContextMenuItem]) -> Void)? = nil) -> UIAlertAction {
+	public func uiAlertAction(childrenHandler: (([ContextMenuItem]) -> Void)? = nil) -> UIAlertAction {
 		let action = UIAlertAction(title: title, style: uiAlertActionStyle) { _ in
 			guard self.children.isEmpty else {
 				childrenHandler?(self.children)
