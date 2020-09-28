@@ -7,18 +7,18 @@ import UIKit
 
 open class LocalizedIndexedCollation<Value> {
 	private class Item {
-        var value: Value
-        @objc var collationString: String
+		var value: Value
+		@objc var collationString: String
 
-        init(_ value: Value, keyPath: KeyPath<Value, String>) {
-            self.value = value
-            self.collationString = value[keyPath: keyPath]
-        }
-    }
+		init(_ value: Value, keyPath: KeyPath<Value, String>) {
+			self.value = value
+			self.collationString = value[keyPath: keyPath]
+		}
+	}
 
 	public struct Section: Hashable {
-        public var title: String
-        public var items: [Value]
+		public var title: String
+		public var items: [Value]
 
 		public static func == (lhs: Self, rhs: Self) -> Bool {
 			lhs.title == rhs.title
@@ -27,29 +27,29 @@ open class LocalizedIndexedCollation<Value> {
 		public func hash(into hasher: inout Hasher) {
 			hasher.combine(title)
 		}
-    }
+	}
 
-    public var sections: [Section]
+	public var sections: [Section]
 
-    public init(items: [Value], sortBy keyPath: KeyPath<Value, String>) {
-        let collation = UILocalizedIndexedCollation.current()
+	public init(items: [Value], sortBy keyPath: KeyPath<Value, String>) {
+		let collation = UILocalizedIndexedCollation.current()
 
-        let selector = #selector(getter: Item.collationString)
+		let selector = #selector(getter: Item.collationString)
 
-        let collationItems = items.map { Item($0, keyPath: keyPath) }
+		let collationItems = items.map { Item($0, keyPath: keyPath) }
 		guard let sortedItems = collation.sortedArray(from: collationItems, collationStringSelector: selector) as? [Item] else { fatalError() }
 
-        self.sections = {
-            var sections = collation.sectionTitles.map {
-                Section(title: $0, items: [])
-            }
-            sortedItems.forEach {
-                let sectionNumber = collation.section(for: $0, collationStringSelector: selector)
-                sections[sectionNumber].items.append($0.value)
-            }
-            return sections.filter { !$0.items.isEmpty }
-        }()
-    }
+		self.sections = {
+			var sections = collation.sectionTitles.map {
+				Section(title: $0, items: [])
+			}
+			sortedItems.forEach {
+				let sectionNumber = collation.section(for: $0, collationStringSelector: selector)
+				sections[sectionNumber].items.append($0.value)
+			}
+			return sections.filter { !$0.items.isEmpty }
+		}()
+	}
 }
 
 // MARK: - SectionRepresentable
@@ -61,5 +61,5 @@ extension LocalizedIndexedCollation.Section: SectionRepresentable where Value: R
 
 // MARK: - Identifiable
 extension LocalizedIndexedCollation.Section: Identifiable {
-    public var id: String { title }
+	public var id: String { title }
 }

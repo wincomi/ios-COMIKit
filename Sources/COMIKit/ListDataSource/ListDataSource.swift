@@ -63,7 +63,7 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 		return snapshot
 	}
 
-	// MARK: - UITableViewDataSource
+	// MARK: - UITableViewDataSource
 	public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		guard let titleForHeader = titleForHeader else { return snapshot().sectionIdentifiers[section].headerText }
 		return titleForHeader(tableView, section)
