@@ -23,19 +23,19 @@ public struct EmptyDataView: View {
 			Text(title)
 				.font(.title)
 				.bold()
-			description.map { description in
+			if let description = description {
 				Text(description)
 					.font(.body)
 					.foregroundColor(.secondary)
 			}
-			buttonTitle.map { buttonTitle in
-				Button(action: {
+			if let buttonTitle = buttonTitle {
+				Button {
 					self.buttonAction?()
-				}) {
+				} label: {
 					Text(buttonTitle)
 						.font(.body)
 				}
 			}
-		}
-    }
+		}.padding()
+	}
 }
