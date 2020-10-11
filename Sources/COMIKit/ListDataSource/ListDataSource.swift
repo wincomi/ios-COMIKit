@@ -43,13 +43,18 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 	public var sectionIndexTitles: ((_ tableView: UITableView) -> [String]?)?
 	public var sectionForSectionIndexTitle: ((_ tableView: UITableView, _ title: String, _ section: Int) -> Int)?
 
+	// MARK: - Inspecting DataSource
+	public var isEmpty: Bool {
+		snapshot().numberOfItems == 0
+	}
+
 	// MARK: - Updating Data
 	public func clear(animatingDifferences: Bool = false) {
 		apply(Snapshot(), animatingDifferences: animatingDifferences)
 	}
 
 	public func apply(with sections: [Section], animatingDifferences: Bool, completion: (() -> Void)? = nil) {
-		apply(snapshot(for: sections), animatingDifferences: animatingDifferences)
+		apply(snapshot(for: sections), animatingDifferences: animatingDifferences, completion: completion)
 	}
 
 	private func snapshot(for sections: [Section]) -> Snapshot {
@@ -63,7 +68,7 @@ open class ListDataSource<Section: SectionRepresentable & Hashable>: UITableView
 		return snapshot
 	}
 
-	// MARK: - UITableViewDataSource
+	// MARK: - UITableViewDataSource
 	public override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		guard let titleForHeader = titleForHeader else { return snapshot().sectionIdentifiers[section].headerText }
 		return titleForHeader(tableView, section)
