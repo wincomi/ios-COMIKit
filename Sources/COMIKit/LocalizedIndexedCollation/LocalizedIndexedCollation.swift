@@ -53,7 +53,7 @@ open class LocalizedIndexedCollation<Value> {
 }
 
 // MARK: - SectionRepresentable
-extension LocalizedIndexedCollation.Section: SectionRepresentable where Value: RowRepresentable & Hashable {
+extension LocalizedIndexedCollation.Section: SectionRepresentable where Value: RowRepresentable {
 	public var headerText: String? { title }
 	public var footerText: String? { nil }
 	public var rows: [Value] { items }
