@@ -16,15 +16,15 @@ open class ValueTableViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	open func configure(with row: RowRepresentable) {
-		textLabel?.text = row.text
-		detailTextLabel?.text = row.secondaryText
-		imageView?.image = row.image
-	}
-
 	open override func layoutSubviews() {
 		super.layoutSubviews()
 
 		detailTextLabel?.textColor = .secondaryLabel
+	}
+
+	open func configure(with row: RowRepresentable) {
+		textLabel?.text = row.text
+		detailTextLabel?.text = row.secondaryText
+		imageView?.image = row.image
 	}
 }
