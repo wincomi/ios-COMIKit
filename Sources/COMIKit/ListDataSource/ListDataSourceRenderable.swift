@@ -10,11 +10,4 @@ public protocol ListDataSourceRenderable {
 	typealias DataSource = ListDataSource<Section>
 
 	var dataSource: DataSource { get set }
-	func setupListDataSource()
-}
-
-extension ListDataSourceRenderable where Self: UITableViewController {
-	public func setupListDataSource() {
-		tableView.dataSource = dataSource
-	}
 }
