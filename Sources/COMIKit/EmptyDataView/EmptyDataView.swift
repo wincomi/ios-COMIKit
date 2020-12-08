@@ -36,6 +36,8 @@ public struct EmptyDataView: View {
 						.font(.body)
 				}
 			}
-		}.padding()
+		}
+		.padding()
+		.multilineTextAlignment(.center)
 	}
 }
